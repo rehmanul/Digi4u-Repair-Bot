@@ -1,0 +1,12 @@
+
+services:
+  - type: web
+    name: digi4u-affiliate-bot
+    env: docker
+    buildCommand: docker build -t digi4u-affiliate-bot .
+    startCommand: docker run -p $PORT:5000 digi4u-affiliate-bot
+    envVars:
+      - key: CHROME_PROFILE_PATH
+        value: /chrome-profile
+      - key: PORT
+        value: 5000
