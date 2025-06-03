@@ -1,108 +1,75 @@
 
-# Digi4u TikTok Affiliate Bot
+# Digi4u Repair UK - TikTok Affiliate Invitation Bot
 
-An automated bot for inviting TikTok creators to join Digi4u Repair UK's affiliate program. The bot searches for relevant creators based on followers, category, and estimated GMV (Gross Merchandise Value).
+An automated bot for inviting TikTok creators to promote Digi4u Repair UK services through collaborations.
 
 ## Features
 
-- **Targeted Creator Search**: Filter creators by:
+- Automated TikTok creator search and filtering
+- Customizable filters for:
   - Follower count
-  - Content category
+  - Category
   - Promotion type (Video/Live)
-  - Estimated GMV
+- GMV-based targeting (highest to lowest)
+- Automatic invitation link generation
+- Detailed logging and tracking of invited affiliates
 
-- **Smart Filtering**:
-  - Sorts creators by estimated GMV
-  - Stops at preset minimum GMV threshold
-  - Tracks invited creators to avoid duplicates
+## Installation
 
-- **Automatic Invitation Links**:
-  - Generates collaboration invite links
-  - Tracks all generated links
-  - Real-time link status monitoring
+1. Clone the repository:
+```bash
+git clone https://github.com/rehmanul/Digi4u-Repair-Bot.git
+cd Digi4u-Repair-Bot
+```
 
-## Local Setup
-
-1. Install dependencies:
+2. Install dependencies:
 ```bash
 pip install -r requirements.txt
 ```
 
-2. Run locally:
-```bash
-python app.py
-```
-
-## Deployment on Render.com
-
-1. Fork or clone this repository
-
-2. Create a new Web Service on Render.com:
-   - Connect your GitHub repository
-   - Select "Docker" as the environment
-   - The following settings will be automatically configured from `render.yaml`:
-     - Build command: `docker build -t digi4u-affiliate-bot .`
-     - Start command: `docker run -p $PORT:5000 digi4u-affiliate-bot`
-
-3. Environment Variables (automatically set from render.yaml):
-   - `CHROME_PROFILE_PATH`: `/chrome-profile`
-   - `PORT`: `5000`
-
-4. Deploy:
-   - Render will automatically build and deploy your application
-   - The deployment process includes:
-     - Setting up a containerized environment
-     - Installing Chrome and dependencies
-     - Configuring the virtual display
-     - Starting the web application
-
-5. Access your deployed bot:
-   - Render will provide a URL like `https://your-app-name.onrender.com`
-   - Open this URL in your browser to access the bot interface
-
-## Important Notes for Deployment
-
-1. **Chrome Profile**:
-   - The deployed version uses a fresh Chrome profile
-   - You'll need to log in to TikTok when starting the bot
-   - The profile is persistent within the container
-
-2. **Security**:
-   - The bot runs in a secure, containerized environment
-   - All traffic is encrypted via HTTPS
-   - Credentials are stored securely in the container
-
-3. **Monitoring**:
-   - Use Render's dashboard to monitor:
-     - Application logs
-     - Resource usage
-     - Error reports
-
-4. **Scaling**:
-   - The application can be scaled through Render's dashboard
-   - Multiple instances can be run for parallel campaigns
-
 ## Usage
 
-1. Access the web interface
-2. Configure campaign settings:
-   - Set minimum followers
-   - Set minimum GMV
-   - Choose category
-   - Select promotion type
-3. Start the campaign
-4. Monitor progress and generated links in real-time
+### Basic Usage
+```bash
+python -m src.main
+```
 
-## Support
+### With Custom Parameters
+```bash
+python -m src.main --invite-count 50 --min-followers 20000 --min-gmv 10000
+```
 
-For issues and support:
-1. Check the application logs in Render dashboard
-2. Submit issues on GitHub
-3. Contact the development team
+### Command Line Arguments
 
-## Legal Compliance
+- `--invite-count`: Number of invitation links to generate
+- `--min-followers`: Minimum number of followers required
+- `--min-gmv`: Minimum GMV threshold for creators
 
-Ensure compliance with:
-- TikTok's Terms of Service
-- Local regulations
-- Data protection laws
+## Configuration
+
+Edit `src/config.py` to customize:
+- TikTok search filters
+- Business information
+- GMV thresholds
+- Logging settings
+
+## Logging
+
+Logs are stored in `affiliate_bot.log`. Invited affiliates are tracked in `invited_affiliates.csv`.
+
+## Business Information
+
+- Website: https://www.digi4u.co.uk/
+- Services: Mobile and electronics repair
+- Location: UK
+
+## Safety Features
+
+- Automatic stop when GMV threshold is reached
+- Tracking of invited creators to prevent duplicates
+- Error handling and logging
+- Rate limiting to comply with TikTok's policies
+
+## Note
+
+This bot is designed for use with TikTok's platform. Please ensure compliance with TikTok's terms of service and API usage policies.
